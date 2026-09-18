@@ -26,6 +26,19 @@ const leads = [
   ['Lê Hoàng Nam', '0903 754 821', 'Mua để ở', '16/09/2026', 'Đang tư vấn'],
 ]
 
+const defaultGtmHead = `<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+<!-- End Google Tag Manager -->`
+
+const defaultGtmBody = `<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->`
+
 function SectionView({ active }) {
   if (active === 'Lead khách hàng') return <section className="panel admin-section">
     <SectionHeader title="Lead khách hàng" description="Khách hàng đăng ký tư vấn từ biểu mẫu trên website" button="Xuất danh sách"/>
@@ -68,13 +81,25 @@ function SectionView({ active }) {
   </section>
 
   if (active === 'SEO website') return <section className="panel admin-section">
-    <SectionHeader title="SEO website" description="Tối ưu thông tin hiển thị trên Google và công cụ tìm kiếm" button="Lưu cấu hình SEO"/>
-    <div className="seo-layout"><div className="admin-form-grid one-col">
-      <AdminField label="Tiêu đề SEO" value="Mai Hoàng Nhân | Tư vấn bất động sản TP.HCM"/>
-      <label>Mô tả website<textarea defaultValue="Mai Hoàng Nhân – Chuyên viên tư vấn bất động sản cao cấp tại Thành phố Hồ Chí Minh."/></label>
-      <AdminField label="Từ khóa chính" value="bất động sản TP.HCM, tư vấn căn hộ, Mai Hoàng Nhân BĐS"/>
-    </div><div className="google-preview"><small>XEM TRƯỚC TRÊN GOOGLE</small><div><span>maihoangnhanbds.com</span><h3>Mai Hoàng Nhân | Tư vấn bất động sản TP.HCM</h3><p>Mai Hoàng Nhân – Chuyên viên tư vấn bất động sản cao cấp tại Thành phố Hồ Chí Minh.</p></div></div></div>
-  </section>
+      <SectionHeader title="SEO website" description="Tối ưu thông tin hiển thị trên Google và công cụ tìm kiếm" button="Lưu cấu hình SEO" onSave={saveGtmConfig}/>
+      <div className="seo-layout">
+        <div className="admin-form-grid one-col">
+          <AdminField label="Tiêu đề SEO" value="Mai Hoàng Nhân | Tư vấn bất động sản TP.HCM"/>
+          <label>Mô tả website<textarea defaultValue="Mai Hoàng Nhân – Chuyên viên tư vấn bất động sản cao cấp tại Thành phố Hồ Chí Minh."/></label>
+          <AdminField label="Từ khóa chính" value="bất động sản TP.HCM, tư vấn căn hộ, Mai Hoàng Nhân BĐS"/>
+        </div>
+        <div className="google-preview">
+          <small>XEM TRƯỚC TRÊN GOOGLE</small>
+          <div><span>maihoangnhanbds.com</span><h3>Mai Hoàng Nhân | Tư vấn bất động sản TP.HCM</h3><p>Mai Hoàng Nhân – Chuyên viên tư vấn bất động sản cao cấp tại Thành phố Hồ Chí Minh.</p></div>
+        </div>
+      </div>
+      <div className="seo-gtm-section">
+        <div className="admin-form-grid one-col">
+            <label>Google Tag Manager - Head (GTM-XXXXXXX)<textarea placeholder="&lt;!-- Google Tag Manager --&gt;&#10;&lt;script&gt;(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':&#10;new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],&#10;j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=&#10;'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);&#10;})(window,document,'script','dataLayer','GTM-XXXXXXX');&lt;/script&gt;&#10;&lt;!-- End Google Tag Manager --&gt;" defaultValue={gtmHead} onChange={(e) => setGtmHead(e.target.value)}/></label>
+            <label>Google Tag Manager - Body (noscript)<textarea placeholder="&lt;!-- Google Tag Manager (noscript) --&gt;&#10;&lt;noscript&gt;&lt;iframe src=&quot;https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX&quot;&#10;height=&quot;0&quot; width=&quot;0&quot; style=&quot;display:none;visibility:hidden&quot;&gt;&lt;/iframe&gt;&lt;/noscript&gt;&#10;&lt;!-- End Google Tag Manager (noscript) --&gt;" defaultValue={gtmBody} onChange={(e) => setGtmBody(e.target.value)}/></label>
+        </div>
+      </div>
+    </section>
 
   if (active === 'Cài đặt') return <section className="panel admin-section">
     <SectionHeader title="Cài đặt website" description="Thiết lập thông tin chung và trạng thái hoạt động" button="Lưu cài đặt"/>
@@ -84,8 +109,8 @@ function SectionView({ active }) {
   return null
 }
 
-function SectionHeader({ title, description, button }) {
-  return <div className="section-admin-head"><div><p>QUẢN LÝ NỘI DUNG</p><h2>{title}</h2><span>{description}</span></div><button><Plus/> {button}</button></div>
+function SectionHeader({ title, description, button, onSave }) {
+  return <div className="section-admin-head"><div><p>QUẢN LÝ NỘI DUNG</p><h2>{title}</h2><span>{description}</span></div><button onClick={onSave}><Plus/> {button}</button></div>
 }
 
 function AdminField({ label, value }) { return <label>{label}<input defaultValue={value}/></label> }
@@ -93,6 +118,8 @@ function AdminField({ label, value }) { return <label>{label}<input defaultValue
 export default function Admin() {
   const [active, setActive] = useState('Tổng quan')
   const [mobileMenu, setMobileMenu] = useState(false)
+  const [gtmHead, setGtmHead] = useState(() => localStorage.getItem('gtm_head') || defaultGtmHead)
+  const [gtmBody, setGtmBody] = useState(() => localStorage.getItem('gtm_body') || defaultGtmBody)
 
   useEffect(() => {
     const robots = document.querySelector('meta[name="robots"]')
@@ -104,6 +131,12 @@ export default function Admin() {
       document.title = 'Mai Hoàng Nhân BĐS | Tư vấn bất động sản TP.HCM'
     }
   }, [])
+
+  const saveGtmConfig = () => {
+    localStorage.setItem('gtm_head', gtmHead)
+    localStorage.setItem('gtm_body', gtmBody)
+    alert('Đã lưu cấu hình Google Tag Manager!')
+  }
 
   return <div className="admin-shell">
     <aside className={mobileMenu ? 'admin-sidebar open' : 'admin-sidebar'}>
