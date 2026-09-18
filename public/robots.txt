@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin
 
-Sitemap: https://maihoangnhanbds.com/sitemap.xml
+Sitemap: https://nguy3nantam.github.io/NhanBDS/sitemap.xml
