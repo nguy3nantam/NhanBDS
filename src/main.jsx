@@ -7,12 +7,14 @@ import {
 import './styles.css'
 import Admin from './Admin'
 
+const asset = (path) => `${import.meta.env.BASE_URL}${path}`
+
 const projects = [
   {
     name: 'The Opera Residence',
     place: 'Thủ Thiêm, TP. Thủ Đức',
     type: 'Căn hộ hạng sang',
-    image: '/images/nhan-reel.jpg',
+    image: asset('images/nhan-reel.jpg'),
   },
   {
     name: 'Sun Thủ Thiêm',
@@ -46,7 +48,7 @@ function App() {
   return <>
     <header className="header">
       <a className="brand" href="#top" aria-label="Trang chủ">
-        <img className="brand-logo" src="/images/logo-mai-hoang-nhan.svg" alt="Logo Mai Hoàng Nhân BĐS"/>
+        <img className="brand-logo" src={asset('images/logo-mai-hoang-nhan.svg')} alt="Logo Mai Hoàng Nhân BĐS"/>
         <span><strong>MAI HOÀNG NHÂN</strong><small>REAL ESTATE ADVISOR</small></span>
       </a>
       <div className="desktop-header-links">
@@ -169,7 +171,7 @@ function App() {
             <div><span>PHÂN TÍCH THỊ TRƯỜNG</span><h3>Vì sao bất động sản ven sông luôn giữ giá trị vượt thời gian?</h3><p>Khám phá những yếu tố tạo nên sức hút bền vững của các dự án ven sông tại TP.HCM.</p></div>
           </article>
           <article className="post video-post">
-            <img src="/images/nhan-reel.jpg" alt="The Opera Residence từ Facebook Mai Hoàng Nhân" loading="lazy" decoding="async"/>
+            <img src={asset('images/nhan-reel.jpg')} alt="The Opera Residence từ Facebook Mai Hoàng Nhân" loading="lazy" decoding="async"/>
             <a className="play" href="https://www.facebook.com/MaiHoangNhanbds" target="_blank" rel="noreferrer"><Play fill="currentColor"/></a>
             <div><span>VIDEO • THỦ THIÊM</span><h3>Sun Thủ Thiêm — quỹ đất ven sông cuối cùng</h3></div>
           </article>
@@ -197,7 +199,7 @@ function App() {
     </main>
 
     <footer>
-      <div className="brand footer-brand"><img className="brand-logo" src="/images/logo-mai-hoang-nhan.svg" alt="Logo Mai Hoàng Nhân BĐS"/><span><strong>MAI HOÀNG NHÂN</strong><small>REAL ESTATE ADVISOR</small></span></div>
+      <div className="brand footer-brand"><img className="brand-logo" src={asset('images/logo-mai-hoang-nhan.svg')} alt="Logo Mai Hoàng Nhân BĐS"/><span><strong>MAI HOÀNG NHÂN</strong><small>REAL ESTATE ADVISOR</small></span></div>
       <p>Chuyên viên tư vấn bất động sản tại TP.HCM.<br/>Chọn đúng hôm nay — vững vàng ngày mai.</p>
       <div className="footer-socials">
         <a href="https://www.facebook.com/MaiHoangNhanbds" target="_blank" rel="noreferrer" aria-label="Fanpage Mai Hoàng Nhân">
@@ -233,5 +235,5 @@ function App() {
 }
 
 createRoot(document.getElementById('root')).render(
-  window.location.pathname.startsWith('/admin') ? <Admin /> : <App />
+  window.location.pathname.endsWith('/admin') ? <Admin /> : <App />
 )

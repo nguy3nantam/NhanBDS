@@ -6,8 +6,10 @@ import {
 } from 'lucide-react'
 import './admin.css'
 
+const asset = (path) => `${import.meta.env.BASE_URL}${path}`
+
 const projects = [
-  { name: 'The Opera Residence', location: 'Thủ Thiêm, TP. Thủ Đức', image: '/images/nhan-reel.jpg', status: 'Đang hiển thị' },
+  { name: 'The Opera Residence', location: 'Thủ Thiêm, TP. Thủ Đức', image: asset('images/nhan-reel.jpg'), status: 'Đang hiển thị' },
   { name: 'Sun Thủ Thiêm', location: 'Khu đô thị Thủ Thiêm', image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=400&q=80', status: 'Đang hiển thị' },
   { name: 'GS Metrocity', location: 'Nhà Bè, TP.HCM', image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=400&q=80', status: 'Bản nháp' },
 ]
@@ -36,7 +38,7 @@ function SectionView({ active }) {
   if (active === 'Slider trang chủ') return <section className="panel admin-section">
     <SectionHeader title="Slider trang chủ" description="Quản lý hình ảnh và thông điệp nổi bật trên đầu trang" button="Thêm slide"/>
     <div className="slider-admin-grid">
-      <article className="slide-admin-card"><img src="/images/nhan-reel.jpg" alt="Slide trang chủ"/><div><span>SLIDE 01 • ĐANG HIỂN THỊ</span><h3>Kiến tạo tài sản. Nâng tầm giá trị.</h3><p>Đồng hành cùng khách hàng tìm kiếm bất động sản phù hợp.</p><button><Pencil/> Chỉnh sửa</button></div></article>
+      <article className="slide-admin-card"><img src={asset('images/nhan-reel.jpg')} alt="Slide trang chủ"/><div><span>SLIDE 01 • ĐANG HIỂN THỊ</span><h3>Kiến tạo tài sản. Nâng tầm giá trị.</h3><p>Đồng hành cùng khách hàng tìm kiếm bất động sản phù hợp.</p><button><Pencil/> Chỉnh sửa</button></div></article>
       <button className="add-slide"><Plus/><b>Thêm slide mới</b><small>JPG, PNG hoặc WebP</small></button>
     </div>
   </section>
@@ -51,7 +53,7 @@ function SectionView({ active }) {
   if (active === 'Thư viện ảnh') return <section className="panel admin-section">
     <SectionHeader title="Thư viện ảnh" description="Hình ảnh cá nhân, dự án và bài viết trên website" button="Tải ảnh lên"/>
     <div className="media-grid">
-      {['/images/nhan-profile.jpg','/images/nhan-reel.jpg','https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=500&q=80','https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=500&q=80'].map((src,i)=><div key={src}><img src={src} alt={`Ảnh thư viện ${i+1}`}/><button><MoreHorizontal/></button></div>)}
+      {[asset('images/nhan-profile.jpg'),asset('images/nhan-reel.jpg'),'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=500&q=80','https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=500&q=80'].map((src,i)=><div key={src}><img src={src} alt={`Ảnh thư viện ${i+1}`}/><button><MoreHorizontal/></button></div>)}
       <button className="media-upload"><Plus/><span>Thêm hình ảnh</span></button>
     </div>
   </section>
@@ -106,7 +108,7 @@ export default function Admin() {
   return <div className="admin-shell">
     <aside className={mobileMenu ? 'admin-sidebar open' : 'admin-sidebar'}>
       <div className="admin-logo">
-        <img src="/images/logo-mai-hoang-nhan.svg" alt="Logo Mai Hoàng Nhân BĐS"/><div><b>NHÂN BĐS</b><small>TRANG QUẢN TRỊ</small></div>
+        <img src={asset('images/logo-mai-hoang-nhan.svg')} alt="Logo Mai Hoàng Nhân BĐS"/><div><b>NHÂN BĐS</b><small>TRANG QUẢN TRỊ</small></div>
         <button onClick={() => setMobileMenu(false)}><X/></button>
       </div>
       <p className="nav-caption">QUẢN LÝ WEBSITE</p>
@@ -116,7 +118,7 @@ export default function Admin() {
         </button>)}
       </nav>
       <div className="site-status"><span/><div><small>TRẠNG THÁI WEBSITE</small><b>Đang hoạt động</b></div></div>
-      <a className="view-site" href="/"><Globe2/> Xem website</a>
+      <a className="view-site" href={import.meta.env.BASE_URL}><Globe2/> Xem website</a>
     </aside>
 
     <div className="admin-main">
@@ -125,14 +127,14 @@ export default function Admin() {
         <div className="admin-search"><Search/><input placeholder="Tìm kiếm nội dung..."/></div>
         <div className="top-actions">
           <button className="notification"><Bell/><span>3</span></button>
-          <div className="admin-user"><img src="/images/nhan-profile.jpg" alt="Mai Hoàng Nhân"/><div><b>Mai Hoàng Nhân</b><small>Quản trị viên</small></div><ChevronDown/></div>
+          <div className="admin-user"><img src={asset('images/nhan-profile.jpg')} alt="Mai Hoàng Nhân"/><div><b>Mai Hoàng Nhân</b><small>Quản trị viên</small></div><ChevronDown/></div>
         </div>
       </header>
 
       <main className="admin-content">
         <div className="admin-title">
           <div><p>TRANG QUẢN TRỊ</p><h1>Xin chào, anh Nhân!</h1><span>Tổng quan hoạt động website của anh hôm nay.</span></div>
-          <div><a href="/" className="outline-button"><Eye/> Xem website</a><button className="gold-button"><Plus/> Tạo nội dung</button></div>
+          <div><a href={import.meta.env.BASE_URL} className="outline-button"><Eye/> Xem website</a><button className="gold-button"><Plus/> Tạo nội dung</button></div>
         </div>
 
         <section className="metric-grid">
