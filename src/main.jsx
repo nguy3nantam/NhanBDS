@@ -186,9 +186,14 @@ function App() {
           <div className="contact-links">
             <a href="tel:0909467505"><Phone/> <span><small>GỌI TRỰC TIẾP</small>0909 467 505</span></a>
             <a href="https://www.facebook.com/MaiHoangNhanbds" target="_blank" rel="noreferrer"><MessageCircle/> <span><small>NHẮN TIN FACEBOOK</small>Mai Hoàng Nhân BĐS</span></a>
+            <a href="https://zalo.me/0909467505" target="_blank" rel="noreferrer"><b className="zalo-icon">Zalo</b> <span><small>NHẮN TIN ZALO</small>0909 467 505</span></a>
           </div>
         </div>
         <form className="contact-form" onSubmit={(e) => { e.preventDefault(); alert('Cảm ơn bạn! Anh Nhân sẽ sớm liên hệ lại.') }}>
+          <div className="contact-form-brand">
+            <img src={asset('images/logo-mai-hoang-nhan.svg')} alt="Logo Mai Hoàng Nhân BĐS"/>
+            <span><b>Mai Hoàng Nhân</b><small>Real Estate Advisor</small></span>
+          </div>
           <label>Họ và tên<input required placeholder="Nhập họ tên của bạn"/></label>
           <label>Số điện thoại<input required type="tel" placeholder="Nhập số điện thoại"/></label>
           <label>Bạn quan tâm đến<select><option>Tư vấn chọn dự án</option><option>Đầu tư bất động sản</option><option>Mua để ở</option></select></label>
@@ -212,7 +217,7 @@ function App() {
           <span className="social-icon youtube">▶</span><b>YouTube</b>
         </a>
       </div>
-      <small>© 2026 Mai Hoàng Nhân. Đã đăng ký bản quyền.</small>
+      <small>© 2026 Mai Hoàng Nhân. Đã đăng ký bản quyền. • Design By Tamdev</small>
     </footer>
 
     <div className={contactOpen ? 'sticky-contact open' : 'sticky-contact'} aria-label="Liên hệ nhanh">
