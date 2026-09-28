@@ -18,6 +18,17 @@ npm run dev
 npm run build
 ```
 
+## Chạy bằng Docker
+
+Docker image này dùng image nền cục bộ `kimsonauto:local`.
+
+```bash
+docker build -t nhanbds:latest .
+docker run --rm --name nhanbds -p 8080:80 nhanbds:latest
+```
+
+Mở `http://localhost:8080/` để xem website và `http://localhost:8080/admin` để xem trang quản trị mẫu.
+
 ## Công nghệ
 
 - React
