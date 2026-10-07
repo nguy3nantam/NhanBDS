@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
 Disallow: /admin
-Disallow: /NhanBDS/admin
 
 Sitemap: https://nguy3nantam.github.io/NhanBDS/sitemap.xml

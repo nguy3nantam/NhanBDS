@@ -38,8 +38,11 @@
 @media(max-width:760px){.admin-sidebar{transform:translateX(-100%);transition:.25s}.admin-sidebar.open{transform:none}.admin-logo button{display:block}.admin-main{width:100%;margin:0}.admin-menu{display:block}.admin-search{display:none}.admin-topbar{padding:0 18px}.admin-user div,.admin-user>svg{display:none}.admin-content{padding:25px 18px 50px}.admin-title{display:block}.admin-title>div:last-child{margin-top:20px}.metric-grid{grid-template-columns:1fr 1fr}.table-head{display:none}.table-row{grid-template-columns:1fr auto}.table-row>span:nth-of-type(1),.table-row>span:nth-of-type(3){display:none}.table-row>button{display:none}}
 @media(max-width:480px){.metric-grid{grid-template-columns:1fr}.admin-title>div:last-child{flex-direction:column}.outline-button,.gold-button{justify-content:center}.chart-wrap{height:190px}.panel{padding:18px}.table-row{grid-template-columns:1fr}.table-row>.status{display:block!important}.project-name img{width:45px}}
 
-.section-overlay { position:absolute; inset:0; z-index:3; padding:34px 3vw 60px; background:var(--admin-bg); }
+.demo-notice { margin:0 0 24px; padding:16px 18px; border:1px solid #d1ac74; background:#fff8eb; font-size:14px; line-height:1.7; }
 .admin-content { position:relative; }
+.admin-shell :where(input,textarea,button):focus-visible { outline:3px solid #ad762c; outline-offset:3px; }
+.admin-form-grid :where(input,textarea)[readonly] { background:#f4f2ed; }
+.admin-sidebar { overflow-y:auto; }
 .admin-section { min-height:570px; }
 .section-admin-head { display:flex; justify-content:space-between; align-items:flex-end; gap:25px; padding-bottom:22px; border-bottom:1px solid var(--admin-line); }
 .section-admin-head p { margin:0 0 7px; color:#b18545; font-size:8px; font-weight:700; letter-spacing:1.5px; }.section-admin-head h2 { margin:0 0 6px; font-family:'Noto Serif'; font-size:27px; font-weight:500; }.section-admin-head span { color:#849096; font-size:9px; }.section-admin-head button { height:41px; padding:0 15px; display:flex; align-items:center; gap:8px; border:0; background:#c69b58; color:#102330; font-size:9px; font-weight:600; }.section-admin-head button svg { width:15px; }
