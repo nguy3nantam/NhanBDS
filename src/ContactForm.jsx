@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { ArrowRight, Check, Copy } from 'lucide-react'
 import { asset, contactTopics } from './data'
 import { createContactMessage, validateContact } from './contact'
@@ -11,10 +11,14 @@ export default function ContactForm({ project = '', onClearProject }) {
   const formRef = useRef(null)
   const draftRef = useRef(null)
 
-  useEffect(() => {
+  // Reset the prepared draft when the selected project changes — React's
+  // documented "adjusting state when a prop changes" pattern (no effect).
+  const [appliedProject, setAppliedProject] = useState(project)
+  if (project !== appliedProject) {
+    setAppliedProject(project)
     setDraft('')
     setCopyStatus('')
-  }, [project])
+  }
 
   function update(event) {
     const { name, value } = event.target
