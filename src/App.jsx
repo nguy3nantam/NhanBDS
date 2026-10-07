@@ -34,7 +34,7 @@ export default function App() {
   return <>
     <a className="skip-link" href="#top">Bỏ qua menu, đến nội dung</a>
     <header className="header">
-      <a className="brand" href="#top" aria-label="Trang chủ">
+      <a className="brand" href="#top">
         <img className="brand-logo" src={asset('images/logo-mai-hoang-nhan.svg')} alt="Logo Mai Hoàng Nhân BĐS"/>
         <span><strong>MAI HOÀNG NHÂN</strong><small>REAL ESTATE ADVISOR</small></span>
       </a>
@@ -61,7 +61,7 @@ export default function App() {
         <div className="offcanvas-socials">
           <p>KẾT NỐI VỚI NHÂN</p>
           <div>
-            <a href="https://www.facebook.com/MaiHoangNhanbds" target="_blank" rel="noreferrer" aria-label="Fanpage"><span>f</span> Fanpage</a>
+            <a href="https://www.facebook.com/MaiHoangNhanbds" target="_blank" rel="noreferrer" aria-label="Fanpage"><span aria-hidden="true"><svg viewBox="0 0 320 512" width="11" height="11" fill="currentColor" focusable="false"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg></span> Fanpage</a>
           </div>
         </div>
         <div className="offcanvas-foot"><small>MAI HOÀNG NHÂN BĐS</small><span>Chọn đúng hôm nay — vững vàng ngày mai.</span></div>
@@ -154,7 +154,7 @@ export default function App() {
         </div>
         <div className="posts">
           <article className="post feature-post">
-            <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=900&q=75" alt="Không gian nhà ở minh họa" width="900" height="600" loading="lazy" decoding="async"/>
+            <img src={https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=900&q=75} alt="Không gian nhà ở minh họa" width="900" height="600" loading="lazy" decoding="async"/>
             <div><span>GÓC NHÌN THỊ TRƯỜNG</span><h3>Điều gì tạo nên giá trị của một không gian sống?</h3><p>Cùng Nhân trao đổi về vị trí, tiện ích và nhu cầu khi lựa chọn bất động sản.</p><a className="text-link" href="https://www.facebook.com/MaiHoangNhanbds" target="_blank" rel="noreferrer">Xem chia sẻ trên Facebook <ArrowRight size={16}/></a></div>
           </article>
           <article className="post video-post">
@@ -185,13 +185,13 @@ export default function App() {
       <p>Chuyên viên tư vấn bất động sản tại TP.HCM.<br/>Chọn đúng hôm nay — vững vàng ngày mai.</p>
       <div className="footer-socials">
         <a href="https://www.facebook.com/MaiHoangNhanbds" target="_blank" rel="noreferrer" aria-label="Fanpage Mai Hoàng Nhân">
-          <span className="social-icon">f</span><b>Fanpage</b>
+          <span className="social-icon" aria-hidden="true"><svg viewBox="0 0 320 512" width="11" height="11" fill="currentColor" focusable="false"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg></span><b>Fanpage</b>
         </a>
       </div>
       <small>© {new Date().getFullYear()} Mai Hoàng Nhân. • Design By Tamdev</small>
     </footer>
 
-    <div className={contactOpen ? 'sticky-contact open' : 'sticky-contact'} aria-label="Liên hệ nhanh">
+    <div className={contactOpen ? 'sticky-contact open' : 'sticky-contact'} role="group" aria-label="Liên hệ nhanh">
       <div className="sticky-options" id="quick-contact-options" inert={!contactOpen}>
         <a className="sticky-item messenger" href="https://m.me/MaiHoangNhanbds" target="_blank" rel="noreferrer" aria-label="Nhắn Messenger">
           <MessageCircle/><span>Messenger</span>
@@ -203,7 +203,7 @@ export default function App() {
           <Phone/><span>0909 467 505</span>
         </a>
       </div>
-      <button className="contact-toggle" onClick={() => setContactOpen(!contactOpen)} aria-label={contactOpen ? 'Đóng liên hệ nhanh' : 'Mở liên hệ nhanh'} aria-expanded={contactOpen} aria-controls="quick-contact-options">
+      <button className="contact-toggle" onClick={() => setContactOpen(!contactOpen)} aria-label={contactOpen ? 'Đóng liên hệ nhanh' : 'Mở liên hệ tư vấn'} aria-expanded={contactOpen} aria-controls="quick-contact-options">
         {contactOpen ? <X/> : <MessageCircle/>}<span>{contactOpen ? 'Đóng' : 'Liên hệ tư vấn'}</span>
       </button>
     </div>

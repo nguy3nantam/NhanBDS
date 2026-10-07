@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   Bell, ChevronDown, Eye, FileText, FolderKanban,
   Globe2, Image, LayoutDashboard, Menu, MessageSquare,
@@ -46,7 +46,7 @@ function SectionView({ active }) {
   if (active === 'Thư viện ảnh') return <section className="panel admin-section">
     <SectionHeader title="Thư viện ảnh" description="Hình ảnh cá nhân, dự án và bài viết trên website" button="Tải ảnh lên"/>
     <div className="media-grid">
-      {[asset('images/nhan-profile.jpg'),asset('images/nhan-reel.jpg'),'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=500&q=80','https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=500&q=80'].map((src,i)=><div key={src}><img src={src} alt={`Ảnh thư viện ${i+1}`}/><button disabled title="Chức năng chưa được kết nối trong bản mẫu"><MoreHorizontal aria-label="Thao tác chưa kết nối"/></button></div>)}
+      {[asset('images/nhan-profile.jpg'),asset('images/nhan-reel.jpg'),https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=500&q=80,https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=500&q=80].map((src,i)=><div key={src}><img src={src} alt={`Ảnh thư viện ${i+1}`}/><button disabled title="Chức năng chưa được kết nối trong bản mẫu"><MoreHorizontal aria-label="Thao tác chưa kết nối"/></button></div>)}
       <button className="media-upload" disabled><Plus/><span>Thêm hình ảnh</span></button>
     </div>
   </section>
@@ -86,6 +86,27 @@ function AdminField({ label, value }) { return <label>{label}<input value={value
 export default function Admin() {
   const [active, setActive] = useState('Tổng quan')
   const [mobileMenu, setMobileMenu] = useState(false)
+  const menuButtonRef = useRef(null)
+  const sidebarRef = useRef(null)
+
+  // Mobile drawer: close on Escape or when returning to desktop width, and
+  // hand focus back to the toggle when the drawer it lived in goes away.
+  useEffect(() => {
+    if (!mobileMenu) return undefined
+    const button = menuButtonRef.current
+    const sidebar = sidebarRef.current
+    const onKeyDown = (event) => { if (event.key === 'Escape') setMobileMenu(false) }
+    const desktop = window.matchMedia('(min-width: 761px)')
+    const onBreakpoint = () => { if (desktop.matches) setMobileMenu(false) }
+    document.addEventListener('keydown', onKeyDown)
+    desktop.addEventListener('change', onBreakpoint)
+    return () => {
+      document.removeEventListener('keydown', onKeyDown)
+      desktop.removeEventListener('change', onBreakpoint)
+      const focused = document.activeElement
+      if (button?.isConnected && (sidebar?.contains(focused) || focused === document.body || focused === null)) button.focus()
+    }
+  }, [mobileMenu])
 
   useEffect(() => {
     const robots = document.querySelector('meta[name="robots"]')
@@ -99,7 +120,8 @@ export default function Admin() {
   }, [])
 
   return <div className="admin-shell">
-    <aside className={mobileMenu ? 'admin-sidebar open' : 'admin-sidebar'}>
+    {mobileMenu && <div className="admin-backdrop" onClick={() => setMobileMenu(false)} aria-hidden="true"/>}
+    <aside ref={sidebarRef} className={mobileMenu ? 'admin-sidebar open' : 'admin-sidebar'}>
       <div className="admin-logo">
         <img src={asset('images/logo-mai-hoang-nhan.svg')} alt="Logo Mai Hoàng Nhân BĐS"/><div><b>NHÂN BĐS</b><small>TRANG QUẢN TRỊ</small></div>
         <button aria-label="Đóng menu quản trị" onClick={() => setMobileMenu(false)}><X/></button>
@@ -114,12 +136,12 @@ export default function Admin() {
       <a className="view-site" href={import.meta.env.BASE_URL}><Globe2/> Xem website</a>
     </aside>
 
-    <div className="admin-main">
+    <div className="admin-main" inert={mobileMenu}>
       <header className="admin-topbar">
-        <button className="admin-menu" aria-label="Mở menu quản trị" aria-expanded={mobileMenu} aria-controls="admin-navigation" onClick={() => setMobileMenu(true)}><Menu/></button>
+        <button ref={menuButtonRef} className="admin-menu" aria-label={mobileMenu ? 'Đóng menu quản trị' : 'Mở menu quản trị'} aria-expanded={mobileMenu} aria-controls="admin-navigation" onClick={() => setMobileMenu((open) => !open)}><Menu/></button>
         <div className="admin-search"><Search/><input aria-label="Tìm kiếm (chưa kết nối)" placeholder="Tìm kiếm chưa kết nối" disabled/></div>
         <div className="top-actions">
-          <button className="notification" aria-label="Thông báo minh họa" disabled><Bell/><span>3</span></button>
+          <button className="notification" aria-label="Thông báo minh họa, 3 đang chờ" disabled><Bell/><span>3</span></button>
           <div className="admin-user"><img src={asset('images/nhan-profile.jpg')} alt="Mai Hoàng Nhân"/><div><b>Mai Hoàng Nhân</b><small>Quản trị viên</small></div><ChevronDown/></div>
         </div>
       </header>
