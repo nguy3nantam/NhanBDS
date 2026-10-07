@@ -31,7 +31,7 @@ function SectionView({ active }) {
   if (active === 'Slider trang chủ') return <section className="panel admin-section">
     <SectionHeader title="Slider trang chủ" description="Quản lý hình ảnh và thông điệp nổi bật trên đầu trang" button="Thêm slide"/>
     <div className="slider-admin-grid">
-      <article className="slide-admin-card"><img src={asset('images/nhan-reel.jpg')} alt="Slide trang chủ"/><div><span>SLIDE 01 • ĐANG HIỂN THỊ</span><h3>Kiến tạo tài sản. Nâng tầm giá trị.</h3><p>Đồng hành cùng khách hàng tìm kiếm bất động sản phù hợp.</p><button disabled title="Chức năng chưa được kết nối trong bản mẫu"><Pencil/> Chỉnh sửa</button></div></article>
+      <article className="slide-admin-card"><img src={asset('images/nhan-reel.webp')} alt="Slide trang chủ"/><div><span>SLIDE 01 • ĐANG HIỂN THỊ</span><h3>Kiến tạo tài sản. Nâng tầm giá trị.</h3><p>Đồng hành cùng khách hàng tìm kiếm bất động sản phù hợp.</p><button disabled title="Chức năng chưa được kết nối trong bản mẫu"><Pencil/> Chỉnh sửa</button></div></article>
       <button className="add-slide" disabled><Plus/><b>Thêm slide mới</b><small>JPG, PNG hoặc WebP</small></button>
     </div>
   </section>
@@ -46,7 +46,7 @@ function SectionView({ active }) {
   if (active === 'Thư viện ảnh') return <section className="panel admin-section">
     <SectionHeader title="Thư viện ảnh" description="Hình ảnh cá nhân, dự án và bài viết trên website" button="Tải ảnh lên"/>
     <div className="media-grid">
-      {[asset('images/nhan-profile.jpg'),asset('images/nhan-reel.jpg'),asset('images/project-sun-thu-thiem.jpg'),asset('images/project-gs-metrocity.jpg')].map((src,i)=><div key={src}><img src={src} alt={`Ảnh thư viện ${i+1}`}/><button disabled title="Chức năng chưa được kết nối trong bản mẫu"><MoreHorizontal aria-label="Thao tác chưa kết nối"/></button></div>)}
+      {[asset('images/nhan-profile.jpg'),asset('images/nhan-reel.webp'),asset('images/project-sun-thu-thiem.webp'),asset('images/project-gs-metrocity.webp')].map((src,i)=><div key={src}><img src={src} alt={`Ảnh thư viện ${i+1}`}/><button disabled title="Chức năng chưa được kết nối trong bản mẫu"><MoreHorizontal aria-label="Thao tác chưa kết nối"/></button></div>)}
       <button className="media-upload" disabled><Plus/><span>Thêm hình ảnh</span></button>
     </div>
   </section>

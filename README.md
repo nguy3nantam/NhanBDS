@@ -61,3 +61,13 @@ Lưu ý SEO: GitHub Pages project site không cho đặt `robots.txt` ở gốc 
 - ESLint
 - Lucide React
 - CSS responsive
+
+## Tối ưu hiệu năng
+
+- **Font tự host**: Be Vietnam Pro & Noto Serif (giấy phép OFL, xem `src/fonts/LICENSE-OFL.txt`)
+  nằm trong bundle ở `src/fonts/`, subset `latin` + `vietnamese` — trang không request
+  `fonts.googleapis.com` nữa và bỏ được ~300KB latin-ext không dùng.
+- **Ảnh WebP**: `nhan-reel`, `post-value-guide`, `project-sun-thu-thiem`, `project-gs-metrocity`
+  đã nén WebP (524KB → 302KB). `social-thumbnail.jpg` và `nhan-profile.jpg` giữ JPEG cho
+  OG tag / JSON-LD.
+- **Cache**: nginx phục vụ `/assets/` (đã hash) `immutable` 1 năm, `/images/` 7 ngày.

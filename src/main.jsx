@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import App from './App'
 import StatusPage from './StatusPage'
 import { resolveRoute } from './routing'
+import './fonts.css'
 
 const Admin = import.meta.env.DEV ? lazy(() => import('./Admin')) : null
 
