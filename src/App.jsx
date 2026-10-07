@@ -154,7 +154,7 @@ export default function App() {
         </div>
         <div className="posts">
           <article className="post feature-post">
-            <img src={https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=900&q=75} alt="Không gian nhà ở minh họa" width="900" height="600" loading="lazy" decoding="async"/>
+            <img src={asset('images/post-value-guide.jpg')} alt="Không gian nhà ở minh họa" width="900" height="600" loading="lazy" decoding="async"/>
             <div><span>GÓC NHÌN THỊ TRƯỜNG</span><h3>Điều gì tạo nên giá trị của một không gian sống?</h3><p>Cùng Nhân trao đổi về vị trí, tiện ích và nhu cầu khi lựa chọn bất động sản.</p><a className="text-link" href="https://www.facebook.com/MaiHoangNhanbds" target="_blank" rel="noreferrer">Xem chia sẻ trên Facebook <ArrowRight size={16}/></a></div>
           </article>
           <article className="post video-post">

@@ -46,7 +46,7 @@ function SectionView({ active }) {
   if (active === 'Thư viện ảnh') return <section className="panel admin-section">
     <SectionHeader title="Thư viện ảnh" description="Hình ảnh cá nhân, dự án và bài viết trên website" button="Tải ảnh lên"/>
     <div className="media-grid">
-      {[asset('images/nhan-profile.jpg'),asset('images/nhan-reel.jpg'),https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=500&q=80,https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=500&q=80].map((src,i)=><div key={src}><img src={src} alt={`Ảnh thư viện ${i+1}`}/><button disabled title="Chức năng chưa được kết nối trong bản mẫu"><MoreHorizontal aria-label="Thao tác chưa kết nối"/></button></div>)}
+      {[asset('images/nhan-profile.jpg'),asset('images/nhan-reel.jpg'),asset('images/project-sun-thu-thiem.jpg'),asset('images/project-gs-metrocity.jpg')].map((src,i)=><div key={src}><img src={src} alt={`Ảnh thư viện ${i+1}`}/><button disabled title="Chức năng chưa được kết nối trong bản mẫu"><MoreHorizontal aria-label="Thao tác chưa kết nối"/></button></div>)}
       <button className="media-upload" disabled><Plus/><span>Thêm hình ảnh</span></button>
     </div>
   </section>
