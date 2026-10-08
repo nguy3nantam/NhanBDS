@@ -56,7 +56,7 @@ function SectionView({ active }) {
     <div className="admin-form-grid">
       <AdminField label="Số hotline" value="0909 467 505"/><AdminField label="Địa điểm" value="Thành phố Hồ Chí Minh"/>
       <AdminField label="Fanpage" value="facebook.com/MaiHoangNhanbds"/><AdminField label="Zalo" value="zalo.me/0909467505"/>
-      <AdminField label="TikTok" value="Chưa thiết lập"/><AdminField label="YouTube" value="Chưa thiết lập"/>
+      <AdminField label="TikTok" value="tiktok.com"/><AdminField label="YouTube" value="youtube.com"/>
     </div>
   </section>
 
