@@ -1,5 +1,9 @@
 # Báo cáo kiểm tra website NhanBDS
 
+> **Lưu ý:** Đây là báo cáo lịch sử ngày 07/10/2026. Nhiều phát hiện bên dưới đã
+> được xử lý; hãy chạy lại `npm test`, `npm run lint`, `npm run build` và
+> `npm audit` để đánh giá mã nguồn hiện tại.
+
 Ngày kiểm tra: 07/10/2026 (Việt Nam).
 
 ## Kết luận

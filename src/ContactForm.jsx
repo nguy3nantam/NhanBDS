@@ -58,7 +58,7 @@ export default function ContactForm({ project = '', onClearProject }) {
       <span><b>Mai Hoàng Nhân</b><small>Real Estate Advisor</small></span>
     </div>
     <p className="form-note" id="contact-instructions">Soạn yêu cầu bên dưới, sau đó sao chép và gửi cho Nhân qua Zalo hoặc Messenger. Thông tin chỉ được gửi khi bạn gửi tin nhắn.</p>
-    {project && <div className="selected-project"><span>Dự án quan tâm: <strong>{project}</strong></span><button type="button" onClick={onClearProject} aria-label="Bỏ chọn dự án">Bỏ chọn</button></div>}
+    {project && <div className="selected-project"><span>Dự án quan tâm: <strong>{project}</strong></span>{onClearProject && <button type="button" onClick={onClearProject} aria-label="Bỏ chọn dự án">Bỏ chọn</button>}</div>}
     <div className="form-field">
       <label htmlFor="contact-name">Họ và tên</label>
       <input id="contact-name" name="name" autoComplete="name" required maxLength={100} value={values.name} onChange={update} placeholder="Nhập họ tên của bạn" aria-invalid={!!errors.name} aria-describedby={errors.name ? 'name-error' : undefined}/>

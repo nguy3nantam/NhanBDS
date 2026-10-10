@@ -1,9 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   ArrowRight, Check, ChevronRight, MapPin,
   Menu, MessageCircle, Phone, Quote, ShieldCheck, X
 } from 'lucide-react'
-import './styles.css'
 import { asset, projects } from './data'
 import ContactForm from './ContactForm'
 import ProjectDialog from './ProjectDialog'
@@ -22,6 +21,15 @@ export default function App() {
   const [contactProject, setContactProject] = useState('')
   const menuRef = useDialog(menuOpen)
 
+  useEffect(() => {
+    if (!contactOpen) return undefined
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') setContactOpen(false)
+    }
+    document.addEventListener('keydown', closeOnEscape)
+    return () => document.removeEventListener('keydown', closeOnEscape)
+  }, [contactOpen])
+
   const go = (id) => {
     setMenuOpen(false)
     requestAnimationFrame(() => {
@@ -35,7 +43,7 @@ export default function App() {
     <a className="skip-link" href="#top">Bỏ qua menu, đến nội dung</a>
     <header className="header">
       <a className="brand" href="#top">
-        <img className="brand-logo" src={asset('images/logo-mai-hoang-nhan.svg')} alt="Logo Mai Hoàng Nhân BĐS"/>
+        <img className="brand-logo" src={asset('images/logo-mai-hoang-nhan.svg')} alt="Logo Mai Hoàng Nhân BĐS" width="46" height="46"/>
         <span><strong>MAI HOÀNG NHÂN</strong><small>REAL ESTATE ADVISOR</small></span>
       </a>
       <div className="desktop-header-links">
@@ -71,7 +79,7 @@ export default function App() {
 
     <main id="top" tabIndex={-1}>
       <section className="hero">
-        <div className="hero-photo" />
+        <img className="hero-photo" src={asset('images/nhan-reel.webp')} alt="" width="1707" height="960" fetchPriority="high" decoding="async"/>
         <div className="hero-overlay" />
         <div className="hero-content reveal">
           <p className="eyebrow"><span/> Chuyên viên tư vấn bất động sản TP.HCM</p>
@@ -92,7 +100,7 @@ export default function App() {
 
       <section className="about section" id="about" tabIndex={-1}>
         <div className="about-image-wrap">
-          <div className="about-image" />
+          <img className="about-image" src={asset('images/nhan-profile.jpg')} alt="Mai Hoàng Nhân, chuyên viên tư vấn bất động sản" width="540" height="960" loading="lazy" decoding="async"/>
           <div className="experience"><b>06</b><span>Năm thấu hiểu<br/>thị trường</span></div>
         </div>
         <div className="about-content">
@@ -119,7 +127,7 @@ export default function App() {
             <img src={p.image} alt={p.illustration ? `Không gian sống minh họa cho mục ${p.name}` : `${p.name} – ${p.place}`} width="900" height="600" loading="lazy" decoding="async"/>
             <span className="project-no">0{i + 1}</span>{p.illustration && <span className="illustration-badge">Ảnh minh họa</span>}
             <div className="project-info">
-              <p>{p.type}</p><h3>{p.name}</h3>
+              <p>{p.type}</p><h3><a href={asset(`du-an/${p.slug}/`)}>{p.name}</a></h3>
               <span><MapPin size={15}/> {p.place}</span>
             </div>
             <button aria-label={`Xem ${p.name}`} onClick={() => setSelectedProject(p)}><ArrowRight/></button>
@@ -158,7 +166,7 @@ export default function App() {
             <div><span>GÓC NHÌN THỊ TRƯỜNG</span><h3>Điều gì tạo nên giá trị của một không gian sống?</h3><p>Cùng Nhân trao đổi về vị trí, tiện ích và nhu cầu khi lựa chọn bất động sản.</p><a className="text-link" href="https://www.facebook.com/MaiHoangNhanbds" target="_blank" rel="noreferrer">Xem chia sẻ trên Facebook <ArrowRight size={16}/></a></div>
           </article>
           <article className="post video-post">
-            <img src={asset('images/nhan-reel.webp')} alt="The Opera Residence từ Facebook Mai Hoàng Nhân" loading="lazy" decoding="async"/>
+            <img src={asset('images/nhan-reel.webp')} alt="The Opera Residence từ Facebook Mai Hoàng Nhân" width="1707" height="960" loading="lazy" decoding="async"/>
             <a aria-label="Mở trang chia sẻ của Nhân trên Facebook" className="play" href="https://www.facebook.com/MaiHoangNhanbds" target="_blank" rel="noreferrer"><MessageCircle/></a>
             <div><span>CHIA SẺ TRÊN FACEBOOK</span><h3>Cùng Nhân khám phá không gian sống</h3></div>
           </article>
@@ -181,7 +189,7 @@ export default function App() {
     </main>
 
     <footer>
-      <div className="brand footer-brand"><img className="brand-logo" src={asset('images/logo-mai-hoang-nhan.svg')} alt="Logo Mai Hoàng Nhân BĐS"/><span><strong>MAI HOÀNG NHÂN</strong><small>REAL ESTATE ADVISOR</small></span></div>
+      <div className="brand footer-brand"><img className="brand-logo" src={asset('images/logo-mai-hoang-nhan.svg')} alt="Logo Mai Hoàng Nhân BĐS" width="46" height="46" loading="lazy"/><span><strong>MAI HOÀNG NHÂN</strong><small>REAL ESTATE ADVISOR</small></span></div>
       <p>Chuyên viên tư vấn bất động sản tại TP.HCM.<br/>Chọn đúng hôm nay — vững vàng ngày mai.</p>
       <div className="footer-socials">
         <a href="https://www.facebook.com/MaiHoangNhanbds" target="_blank" rel="noreferrer" aria-label="Fanpage Mai Hoàng Nhân">
@@ -226,4 +234,3 @@ export default function App() {
     }}/>
   </>
 }
-

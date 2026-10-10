@@ -65,6 +65,27 @@ describe('contact flow', () => {
 })
 
 describe('navigation', () => {
+  it('uses an eager high-priority hero image and lazy-loads below-the-fold imagery', () => {
+    render(<App/>)
+    const hero = document.querySelector('.hero-photo')
+    const profile = screen.getByAltText('Mai Hoàng Nhân, chuyên viên tư vấn bất động sản')
+    expect(hero).toHaveAttribute('fetchpriority', 'high')
+    expect(hero).not.toHaveAttribute('loading', 'lazy')
+    expect(profile).toHaveAttribute('loading', 'lazy')
+    expect(profile).toHaveAttribute('width', '540')
+    expect(profile).toHaveAttribute('height', '960')
+  })
+
+  it('closes quick contact on Escape', async () => {
+    const user = userEvent.setup()
+    render(<App/>)
+    const toggle = screen.getByRole('button', { name: 'Mở liên hệ tư vấn' })
+    await user.click(toggle)
+    expect(toggle).toHaveAttribute('aria-expanded', 'true')
+    await user.keyboard('{Escape}')
+    expect(screen.getByRole('button', { name: 'Mở liên hệ tư vấn' })).toHaveAttribute('aria-expanded', 'false')
+  })
+
   it('closes the menu on native cancel and restores focus and page scrolling', async () => {
     const user = userEvent.setup()
     render(<App/>)
